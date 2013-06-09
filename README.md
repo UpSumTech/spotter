@@ -7,6 +7,7 @@ observers for specific methods.
 ## Build status
 
 [![Build Status](https://travis-ci.org/sumanmukherjee03/spotter.png)](https://travis-ci.org/sumanmukherjee03/spotter)
+[![Code Climate](https://codeclimate.com/github/sumanmukherjee03/spotter.png)](https://codeclimate.com/github/sumanmukherjee03/spotter)
 
 ## Installation
 
