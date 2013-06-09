@@ -9,21 +9,25 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Suman Mukherjee"]
-  s.date = "2013-06-03"
+  s.date = "2013-06-09"
   s.description = "Gem that provides a simple interface for adding observers to your ruby classes"
   s.email = "sumanmukherjee03@gmail.com"
   s.extra_rdoc_files = [
     "LICENSE.txt",
-    "README.rdoc"
+    "README.md"
   ]
   s.files = [
     ".document",
+    ".travis.yml",
     "Gemfile",
     "LICENSE.txt",
-    "README.rdoc",
+    "README.md",
     "Rakefile",
     "VERSION",
-    "lib/spotter.rb"
+    "lib/spotter.rb",
+    "spec/lib/spotter_spec.rb",
+    "spec/spec_helper.rb",
+    "spotter.gemspec"
   ]
   s.homepage = "http://github.com/sumanmukherjee03/spotter"
   s.licenses = ["MIT"]
@@ -44,9 +48,17 @@ Gem::Specification.new do |s|
       s.add_development_dependency(%q<travis-lint>, [">= 0"])
       s.add_development_dependency(%q<rspec>, [">= 0"])
       s.add_development_dependency(%q<coveralls>, [">= 0"])
+      s.add_development_dependency(%q<jeweler>, [">= 0"])
+      s.add_development_dependency(%q<travis-lint>, [">= 0"])
+      s.add_development_dependency(%q<rspec>, [">= 0"])
+      s.add_development_dependency(%q<coveralls>, [">= 0"])
     else
       s.add_dependency(%q<spotter>, [">= 0"])
       s.add_dependency(%q<activesupport>, [">= 0"])
+      s.add_dependency(%q<travis-lint>, [">= 0"])
+      s.add_dependency(%q<rspec>, [">= 0"])
+      s.add_dependency(%q<coveralls>, [">= 0"])
+      s.add_dependency(%q<jeweler>, [">= 0"])
       s.add_dependency(%q<travis-lint>, [">= 0"])
       s.add_dependency(%q<rspec>, [">= 0"])
       s.add_dependency(%q<coveralls>, [">= 0"])
@@ -58,6 +70,10 @@ Gem::Specification.new do |s|
   else
     s.add_dependency(%q<spotter>, [">= 0"])
     s.add_dependency(%q<activesupport>, [">= 0"])
+    s.add_dependency(%q<travis-lint>, [">= 0"])
+    s.add_dependency(%q<rspec>, [">= 0"])
+    s.add_dependency(%q<coveralls>, [">= 0"])
+    s.add_dependency(%q<jeweler>, [">= 0"])
     s.add_dependency(%q<travis-lint>, [">= 0"])
     s.add_dependency(%q<rspec>, [">= 0"])
     s.add_dependency(%q<coveralls>, [">= 0"])
