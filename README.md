@@ -4,8 +4,7 @@ Allows you to easily add observers to your objects.
 You can define several observers for a single class and add specific
 observers for specific methods.
 
-## Build status
-
+[![Gem Version](https://badge.fury.io/rb/spotter.png)](http://badge.fury.io/rb/spotter)
 [![Build Status](https://travis-ci.org/sumanmukherjee03/spotter.png)](https://travis-ci.org/sumanmukherjee03/spotter)
 [![Code Climate](https://codeclimate.com/github/sumanmukherjee03/spotter.png)](https://codeclimate.com/github/sumanmukherjee03/spotter)
 [![Dependency Status](https://gemnasium.com/sumanmukherjee03/spotter.png)](https://gemnasium.com/sumanmukherjee03/spotter)
