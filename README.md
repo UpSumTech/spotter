@@ -9,6 +9,7 @@ observers for specific methods.
 [![Build Status](https://travis-ci.org/sumanmukherjee03/spotter.png)](https://travis-ci.org/sumanmukherjee03/spotter)
 [![Code Climate](https://codeclimate.com/github/sumanmukherjee03/spotter.png)](https://codeclimate.com/github/sumanmukherjee03/spotter)
 [![Dependency Status](https://gemnasium.com/sumanmukherjee03/spotter.png)](https://gemnasium.com/sumanmukherjee03/spotter)
+[![Coverage Status](https://coveralls.io/repos/sumanmukherjee03/spotter/badge.png)](https://coveralls.io/r/sumanmukherjee03/spotter)
 
 ## Installation
 
