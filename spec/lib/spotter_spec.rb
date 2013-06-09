@@ -18,6 +18,7 @@ describe Spotter do
     include Spotter
 
     register_observers :foo
+    methods_observed :save, :improper_save, :another_improper_save
 
     attr_accessor :bar
 
@@ -26,10 +27,27 @@ describe Spotter do
     end
 
     def save
-      attach_observers(:foo)
-      self.bar += 'test'
-      changed
-      notify_observers
+      run_observers(:for => :save, :with => :foo) do
+        self.bar += 'test'
+      end
+    end
+
+    def improper_save
+      run_observers(:for => :improper_save) do
+        self.bar += 'test'
+      end
+    end
+
+    def another_improper_save
+      run_observers(:with => :foo) do
+        self.bar += 'test'
+      end
+    end
+
+    def unobserved_save
+      run_observers(:for => :unobserved_save, :with => :foo) do
+        self.bar += 'test'
+      end
     end
   end
 
@@ -40,6 +58,18 @@ describe Spotter do
       subject.save
       subject.bar.should eq('holatestobserver')
     end
+  end
+
+  it "throws an error when you call run_observers without a option :with" do
+    expect { subject.improper_save }.to raise_exception(ArgumentError, "Must have an option called :with")
+  end
+
+  it "throws an error when you call run_observers without a option :for" do
+    expect { subject.another_improper_save }.to raise_exception(ArgumentError, "Must have an option called :for")
+  end
+
+  it "throws an error when you call run_observers with an option :for which represents a method that is not observed" do
+    expect { subject.unobserved_save }.to raise_exception(ArgumentError, "Method is not being observed")
   end
 
   it "throws an error when the observer is not found" do
