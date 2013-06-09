@@ -1,6 +1,8 @@
 ## Spotter
 
-A gem that allows you to add observers to your classes easily.
+Allows you to easily add observers to your objects.
+You can define several observers for a single class and add specific
+observers for specific methods.
 
 ## Build status
 
@@ -21,56 +23,84 @@ Or install it yourself as:
     $ gem install spotter
 
 ## Usage
-Lets say there is a class called SpotterTest which needs to be observed by a class called Foo.
-In the SpotterTest class, you need to include the module Spotter.
-Then in every method where you want to trigger the observer, you need to add 3 lines.
+Lets say there is a class called SuperHero.
+Assume we need to observe the object with an observer Foo when it is saved.
+Assume we need to observe the object with an observer Bar when it is reset.
 
-Here's our SpotterTest class and lets say the save method triggers the observer foo.
+In the SuperHero class, you need to include the module Spotter.
+You need to register your observers using the ```register_observers``` class method.
+You also need to specify the methods being observed using the ```methods_observed``` class method.
+And lastly, you need to invoke ```run_observers``` in the method where you want to trigger the observers.
 ```ruby
-class SpotterTest
+class SuperHero
   
   include Spotter
 
-  register_observers :foo
+  register_observers :foo, :bar
+  methods_observed :build, :destroy
 
-  attr_accessor :bar
+  attr_accessor :super_hero
 
   def initialize
-    @bar = 'hola'
+    @super_hero = 'Ironman'
   end
 
-  def save
-    attach_observers(:foo) # attach the observer you wish to trigger. You can have multiple comma separated observers.
-    self.bar += 'test'
-    changed # Call this method to mark the object as changed
-    notify_observers # Call this method to trigger the observers
+  def build
+    run_observers(:for => :save, :with => :foo) do
+      self.super_hero += ' - Tony Stark'
+    end
+  end
+
+  def destroy
+    run_observers(:for => :reset, :with => :bar) do
+      self.super_hero = self.super_hero.split('-').first.strip
+    end
   end
 end
 ```
+While calling the method ```run_observers```, you need to specify 2 options - :for and :with.
+The :for option specifies the method for which the observer is to be called.
+The :with option specifies the observers which need to be triggered.
+You also need to pass it a block, which contains the actual body of the method.
+The run_observers method attaches the observer to the object and then triggers them.
+
+As the example above depicts, you can have multiple observers - :foo, :bar.
+Also, you can have multiple methods being observed with different observers.
 
 Now we need to implement our observer.
 The observer must be within the namespace of the class.
-So, the observer is named Spottertest::Foo and not just Foo.
-
+So, the observers named named Spottertest::Foo SuperHero::Bar and not just Foo or Bar.
 ```ruby
-class SpotterTest::Foo
+class SuperHero::Foo
   attr_accessor :obj
 
   def initialize(obj)
     @obj = obj
-    obj.add_observer(self)
+    obj.add_observer(self, :notify_paparrazzi)
   end
 
-  def update
-    obj.bar += 'observer'
+  def notify_paparrazzi
+    Notifier.inform_paparazzi(obj) # Send an email to paparazzi
+  end
+end
+
+class SuperHero::Bar
+  attr_accessor :obj
+
+  def initialize(obj)
+    @obj = obj
+    obj.add_observer(self, :notify_the_mandarin)
+  end
+
+  def notify_the_mandarin
+    Notifier.inform_mandarin(obj) # Send an email to mandarin
   end
 end
 ```
-
-The initialize method must accept the instance of the class it is observing.
-It must also add itself to the instance of the class being observed.
-By default update is called when notify_observers is called from the class being observed.
-However, if you want a different method to be triggered, you can pass the method name as a second argument to add_observer.
+The initialize method of the observer must accept the object it is observing.
+It must then add itself to the object being observed.
+By default the method ```update``` is called when notify_observers is invoked.
+However, while adding the observer you can specify which method is to be invoked.
 
 ## Contributing
 
