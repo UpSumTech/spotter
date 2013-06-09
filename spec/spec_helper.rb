@@ -3,6 +3,8 @@ $LOAD_PATH.unshift(File.dirname(__FILE__))
 
 require 'rubygems'
 require 'rspec'
+require 'spotter'
+require 'coveralls'
 
 RSpec.configure do |config|
   config.mock_with :rspec
@@ -15,4 +17,4 @@ RSpec.configure do |config|
   config.tty = true
 end
 
-require 'spotter'
+Coveralls.wear!
